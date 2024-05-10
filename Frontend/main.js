@@ -1,4 +1,9 @@
-// const boardElement = document.querySelector("board");
+
+const Web3 = require('web3');
+
+// Create Web3 instance
+const web3 = new Web3(window.ethereum);
+
 const cellElement = document.getElementById("cells");
 
 const contractAddress = "0xd2D289103854dA4F508d777de39965CAA19e3Cb0";
@@ -93,18 +98,17 @@ const contractABI = [
 
 const board = document.getElementById("board");
 function getcolor(i, j) {
-  window.contract.methods.getColor(i, j).call();
+  contract.methods.getColor(i, j).call();
 }
 function revealColor(e) {
   console.log(e.target);
 }
 async function reveal() {
   window.ethereum = await new Web3(window.ethereum);
-  window.contract = await new window.ethereum.eth.Contract(
-    contractABI,
-    contractAddress
-  );
-  const color = await window.contract.methods.getGrid().call();
+
+  const contract = await new web3.eth.Contract(contractABI, contractAddress);
+
+  const color = await contract.methods.getGrid().call();
   function getColor(id) {
     return id === 1 ? "black" : id === 2 ? "red" : id === 3 ? "blue" : "white";
   }
