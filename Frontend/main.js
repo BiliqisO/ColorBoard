@@ -1,63 +1,32 @@
-import { Web3 } from 'web3';
-// const Web3 = require('web3');
+// import { Web3 } from "web3";
+// const Web3 = require("web3");
 
 // Create Web3 instance
-const web3 = new Web3(window.ethereum);
 
 const cellElement = document.getElementById("cells");
 
-const contractAddress = "0xd2D289103854dA4F508d777de39965CAA19e3Cb0";
+const contractAddress = "0x49dA60F405103d37E61FbAd19a532214D4ED0B64";
 const contractABI = [
   {
     inputs: [
-      {
-        internalType: "uint8",
-        name: "i",
-        type: "uint8",
-      },
-      {
-        internalType: "uint8",
-        name: "j",
-        type: "uint8",
-      },
+      { internalType: "uint8", name: "i", type: "uint8" },
+      { internalType: "uint8", name: "j", type: "uint8" },
     ],
     name: "GetColor",
     outputs: [
-      {
-        internalType: "enum ColorBoard.Colors",
-        name: "",
-        type: "uint8",
-      },
-      {
-        internalType: "string",
-        name: "",
-        type: "string",
-      },
+      { internalType: "enum ColorBoard.Colors", name: "", type: "uint8" },
+      { internalType: "string", name: "", type: "string" },
     ],
     stateMutability: "view",
     type: "function",
   },
   {
     inputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+      { internalType: "uint256", name: "", type: "uint256" },
+      { internalType: "uint256", name: "", type: "uint256" },
     ],
     name: "cells",
-    outputs: [
-      {
-        internalType: "uint8",
-        name: "",
-        type: "uint8",
-      },
-    ],
+    outputs: [{ internalType: "uint8", name: "", type: "uint8" }],
     stateMutability: "view",
     type: "function",
   },
@@ -65,11 +34,7 @@ const contractABI = [
     inputs: [],
     name: "colors",
     outputs: [
-      {
-        internalType: "enum ColorBoard.Colors",
-        name: "",
-        type: "uint8",
-      },
+      { internalType: "enum ColorBoard.Colors", name: "", type: "uint8" },
     ],
     stateMutability: "view",
     type: "function",
@@ -77,13 +42,7 @@ const contractABI = [
   {
     inputs: [],
     name: "getGrid",
-    outputs: [
-      {
-        internalType: "uint8[7][5]",
-        name: "",
-        type: "uint8[7][5]",
-      },
-    ],
+    outputs: [{ internalType: "uint8[7][5]", name: "", type: "uint8[7][5]" }],
     stateMutability: "view",
     type: "function",
   },
@@ -104,8 +63,8 @@ function revealColor(e) {
   console.log(e.target);
 }
 async function reveal() {
-  window.ethereum = await new Web3(window.ethereum);
-
+  // window.ethereum = await new Web3(window.ethereum);
+  const web3 = await new Web3(window.ethereum);
   const contract = await new web3.eth.Contract(contractABI, contractAddress);
 
   const color = await contract.methods.getGrid().call();
