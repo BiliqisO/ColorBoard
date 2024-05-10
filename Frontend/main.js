@@ -1,5 +1,5 @@
-
-const Web3 = require('web3');
+import { Web3 } from 'web3';
+// const Web3 = require('web3');
 
 // Create Web3 instance
 const web3 = new Web3(window.ethereum);
