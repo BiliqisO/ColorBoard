@@ -100,7 +100,7 @@ function revealColor(e) {
 }
 async function reveal() {
   window.ethereum = await new Web3(window.ethereum);
-  window.contract = await new window.web3.eth.Contract(
+  window.contract = await new window.ethereum.Contract(
     contractABI,
     contractAddress
   );
